@@ -8,4 +8,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="CustomTextStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="CustomSmallTextStyle" parent="CustomTextStyle">
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
+    <style name="CustomMediumTextStyle" parent="CustomTextStyle">
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
+
+    <style name="CustomBigTextStyle" parent="CustomTextStyle">
+        <item name="android:textSize">@dimen/big_text_size</item>
+    </style>
+
 </resources>

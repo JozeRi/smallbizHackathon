@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">smallbizHackathon</string>
+    <string name="add_new_employee_text">הוסף עובד חדש</string>
 </resources>
