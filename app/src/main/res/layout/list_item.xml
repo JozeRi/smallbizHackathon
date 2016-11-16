@@ -13,20 +13,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dateTv"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center" />
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/descriptionTv"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center" />
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/amuntTv"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textAlignment="center" />
     </LinearLayout>
 </LinearLayout>
