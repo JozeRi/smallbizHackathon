@@ -6,10 +6,7 @@ package heroapps.com.smallbizhackathon.model;
 
 public class Constants {
 
-    public static final String API_SUB_KEY = "9b8e45f4c990404e873a10dfc123ac20";
-
-    public static final String URL_GET_ACCOUNT_TRANSACTIONS = "http://bankapitest.azure-api.net/v11/accountTransactions/getAccountTransactions/9121008976501?offset=0&limit=50&version=V2";
-
+    public static final String BANK_API_KEY = "9b8e45f4c990404e873a10dfc123ac20";
 
     // --- RETROFIT RELATED CONSTANTS START ! ---
 
