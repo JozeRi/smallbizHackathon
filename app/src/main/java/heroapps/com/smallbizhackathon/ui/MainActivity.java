@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import heroapps.com.smallbizhackathon.R;
+import heroapps.com.smallbizhackathon.model.retrofitobjects.AccountTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,13 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+
+      TextView title= (TextView)findViewById(R.id.titleTv);
+      title.setText(R.string.hello );
+
+      TextView subtitle= (TextView)findViewById(R.id.subtitleTv);
+      title.setText(R.string.your_balance );
 
       RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerList);
       //MyAdapter adapter = new MyAdapter(listF);
@@ -35,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
   public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     // 8> Create the data structure
-    private ArrayList<String> strings;
+    private ArrayList<AccountTransaction> strings;
 
 
     // 9> create constructor that gets a new ArrayList
-    public MyAdapter(ArrayList<String> string) {
+    public MyAdapter(ArrayList<AccountTransaction> string) {
 
       this.strings = string;
     }
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-      holder.bindText( strings.get(position) );
+       // holder.bindText( );
 
     }
 
@@ -71,19 +79,26 @@ public class MainActivity extends AppCompatActivity {
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
       // 5> add the view variables
-      private TextView text;
+        private TextView date;
+        private TextView description;
+        private TextView amunt;
 
-      // 3> Add constructor
+
+
+        // 3> Add constructor
       public MyViewHolder(View itemView) {
         super(itemView);
 
         // 6> find the views and connect to the variables
-        text = (TextView) itemView.findViewById(R.id.text);
+          date = (TextView) itemView.findViewById(R.id.dateTv);
+          description = (TextView) itemView.findViewById(R.id.descriptionTv);
+          amunt = (TextView) itemView.findViewById(R.id.amuntTv);
 
 
-        text.setOnClickListener(new View.OnClickListener() {
+          itemView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+
 
             //Intent intent=new Intent(this,DetailActivity.class);
             //intent.putExtra("detail",text.getText());
@@ -98,10 +113,11 @@ public class MainActivity extends AppCompatActivity {
 
 
       // 7> create the binding method - what data goes to which view!
-      public void bindText(String txt ) {
+      public void bindText(String txt, String txt1, String txt2 ) {
 
-        text.setText(txt);
-
+        date.setText(txt);
+        description.setText(txt1);
+        amunt.setText(txt2);
 
       }
     }

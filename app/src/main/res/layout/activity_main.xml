@@ -13,7 +13,7 @@
         android:text="@string/hello"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/TitleTv"
+        android:id="@+id/titleTv"
         android:textSize="18sp" />
 
     <TextView
