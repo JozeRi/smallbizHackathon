@@ -3,7 +3,6 @@ package heroapps.com.smallbizhackathon.business.listeners;
 import java.util.List;
 
 import heroapps.com.smallbizhackathon.model.retrofitobjects.AccountTransaction;
-import heroapps.com.smallbizhackathon.model.retrofitobjects.AllAccountTransactions;
 
 /**
  * Created by Refael Ozeri on 16/11/2016.
