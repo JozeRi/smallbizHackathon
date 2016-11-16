@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-  public static final String BASE_URL = "http://friendsapp.hero-apps.io/api/v1/";
+  public static final String BASE_URL = "http://bankapitest.azure-api.net/v11/";
 
   private static Retrofit retrofit = null;
 
