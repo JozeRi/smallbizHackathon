@@ -36,6 +36,35 @@ public class Constants {
 
     // --- RETROFIT RELATED CONSTANTS ENDS ! ---
 
+    // JSON
+
+    /*{
+        "version": "V1.1",
+            "accountID": "9121008976501",
+            "validityDate": 1442361600000,
+            "transactionDate": "2015-09-16",
+            "valueDate": "2015-09-16",
+            "transactionId": "8",
+            "amount": "3.50",
+            "balance": -47529.84,
+            "debit": "חובה",
+            "melel": "ישראכרט",
+            "transactionDescription": "ישראכרט - יורוקרט",
+            "institutionName": "",
+            "comment": "",
+            "account": {
+        "accountID": "9121008976501",
+                "bankId": "912",
+                "bankName": "בנק הפועלים בע מ",
+                "branchId": "100",
+                "accountNumber": "8976501",
+                "accountName": "מלכי ישראל",
+                "accountTypeDescription": "חשבון עובר ושב",
+                "accountOpenDate": "2000-09-01",
+                "validityDate": "2015-09-30",
+                "validityMonth": "201509"
+    }*/
+
 
 
 
