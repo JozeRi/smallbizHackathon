@@ -1,8 +1,10 @@
-package heroapps.com.smallbizhackathon;
+package heroapps.com.smallbizhackathon.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
+
+import heroapps.com.smallbizhackathon.R;
 
 public class SignInActivity extends AppCompatActivity {
 
