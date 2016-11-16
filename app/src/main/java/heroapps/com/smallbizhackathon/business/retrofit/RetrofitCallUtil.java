@@ -11,7 +11,7 @@ public class RetrofitCallUtil {
 //   * Popular categories will be marked with a specific boolean.
 //   */
 //  private static void fetchAllCategories() {
-//    BaseApplication.getInstance().getRetrofit().getAllCategories(SharedPref.getAccessToken()).enqueue(new Callback<AllCategories>() {
+//    BaseApplication.getInstance().getRetrofit().sendPhoneVerification(SharedPref.getAccessToken()).enqueue(new Callback<AllCategories>() {
 //      @Override
 //      public void onResponse(Call<AllCategories> call, Response<AllCategories> response) {
 //        if (response.body() == null) {
