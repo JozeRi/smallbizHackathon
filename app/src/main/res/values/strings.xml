@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">smallbizHackathon</string>
+    <string name="hello">hello</string>
+    <string name="your_balance">your account balance:</string>
 </resources>
