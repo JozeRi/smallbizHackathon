@@ -11,7 +11,7 @@ public class Constants {
     //RETROFIT TRANSACTIONS CONSTANTS
     public static final String RETRO_VERSION = "version";
 
-    public static final String RETRO_VALIDITY_TYPE = "validityDate";
+    public static final String RETRO_VALIDITY_DATE = "validityDate";
     public static final String RETRO_VALIDITY_MONTH = "validityMonth";
 
     public static final String RETRO_TRANS_DATE = "transactionDate";
@@ -22,6 +22,10 @@ public class Constants {
     public static final String RETRO_INST_NAME = "institutionName";
     public static final String RETRO_COMMENT = "comment";
 
+    public static final String RETRO_TRANSACTION_ID = "transactionId";
+    public static final String RETRO_VALUE_DATE = "valueDate";
+    public static final String RETRO_BALANCE = "balance";
+    public static final String RETRO_BRANCH_ID = "branchId";
     ///// ACCOUNT
     public static final String RETRO_ACCOUNT = "account";
     public static final String RETRO_ACC_ID = "accountID";
@@ -35,35 +39,6 @@ public class Constants {
     public static final String RETRO_BANK_NAME = "bankName";
 
     // --- RETROFIT RELATED CONSTANTS ENDS ! ---
-
-    // JSON
-
-    /*{
-        "version": "V1.1",
-            "accountID": "9121008976501",
-            "validityDate": 1442361600000,
-            "transactionDate": "2015-09-16",
-            "valueDate": "2015-09-16",
-            "transactionId": "8",
-            "amount": "3.50",
-            "balance": -47529.84,
-            "debit": "חובה",
-            "melel": "ישראכרט",
-            "transactionDescription": "ישראכרט - יורוקרט",
-            "institutionName": "",
-            "comment": "",
-            "account": {
-        "accountID": "9121008976501",
-                "bankId": "912",
-                "bankName": "בנק הפועלים בע מ",
-                "branchId": "100",
-                "accountNumber": "8976501",
-                "accountName": "מלכי ישראל",
-                "accountTypeDescription": "חשבון עובר ושב",
-                "accountOpenDate": "2000-09-01",
-                "validityDate": "2015-09-30",
-                "validityMonth": "201509"
-    }*/
 
 
 
