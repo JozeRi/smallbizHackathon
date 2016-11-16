@@ -14,13 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/titleTv"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:text="@string/your_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/subtitleTv" />
+        android:id="@+id/subtitleTv"
+        android:textSize="18sp" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
