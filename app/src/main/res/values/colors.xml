@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">@color/darkGreen</color>
     <color name="colorAccent">@color/blueGray</color>
 
-    <color name="white">#FFFFFF</color>
-    <color name="green">#4FAD54</color>
+    <color name="white">#ffffff</color>
+    <color name="green">#924fad54</color>
     <color name="darkGreen">#3E8E43</color>
-    <color name="blueGray">#607C89</color>
+    <color name="blueGray">#46607c89</color>
 
 
 </resources>

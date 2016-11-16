@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">smallbizHackathon</string>
-    <string name="hello">hello</string>
-    <string name="your_balance">your account balance:</string>
+    <string name="hello">שלום</string>
+    <string name="your_balance">יתרתך בחשבון:</string>
     <string name="add_new_employee_text">הוסף עובד חדש</string>
 </resources>
