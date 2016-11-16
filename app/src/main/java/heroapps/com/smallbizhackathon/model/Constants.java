@@ -6,6 +6,8 @@ package heroapps.com.smallbizhackathon.model;
 
 public class Constants {
 
+    // --- RETROFIT RELATED CONSTANTS START ! ---
+
     //RETROFIT TRANSACTIONS CONSTANTS
     public static final String RETRO_VERSION = "version";
 
@@ -32,7 +34,7 @@ public class Constants {
     public static final String RETRO_BANK_ID = "bankId";
     public static final String RETRO_BANK_NAME = "bankName";
 
-
+    // --- RETROFIT RELATED CONSTANTS ENDS ! ---
 
 
 

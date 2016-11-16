@@ -1,4 +1,4 @@
-package heroapps.com.smallbizhackathon.model;
+package heroapps.com.smallbizhackathon.model.retrofitobjects;
 
 /**
  * Created by Refael Ozeri on 16/11/2016.
