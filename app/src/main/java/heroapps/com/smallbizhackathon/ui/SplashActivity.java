@@ -21,6 +21,7 @@ import java.util.TimerTask;
 
 import heroapps.com.smallbizhackathon.R;
 import heroapps.com.smallbizhackathon.business.SharedPref;
+import heroapps.com.smallbizhackathon.business.Utils;
 import heroapps.com.smallbizhackathon.model.User;
 
 public class SplashActivity extends AppCompatActivity {
@@ -52,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_splash);
+    Utils.createLocalNotification("Best solution for your business", "Best solution for your business", "Best solution for your business", this);
       initViews();
       mCurrentScene = mBaseScene;
       setupTransitions();
