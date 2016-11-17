@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
             recyclerView.swapAdapter(adapter, true);
 
+          //todo - sg meri - open this activity if needed.
+//          startActivity(TransactionActivity.getTransactionIntent(MainActivity.this, 12));
+
         }
 
         @Override
