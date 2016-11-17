@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import heroapps.com.smallbizhackathon.R;
+import heroapps.com.smallbizhackathon.model.Employee;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class QuickActions extends AppCompatActivity {
 
@@ -31,9 +34,12 @@ public class QuickActions extends AppCompatActivity {
         payimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Realm mRealm = Realm.getDefaultInstance();
 
-                //Intent intent=new Intent(QuickActions.this,EmployeesActivity.class);
-                //startActivity(intent);
+                if (mRealm == null) return;
+                RealmResults<Employee> results = mRealm.where(Employee.class).findAll();
+                int count = results.size();
+                startActivity(TransactionActivity.getTransactionIntent(QuickActions.this, count));
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
             }
         });
