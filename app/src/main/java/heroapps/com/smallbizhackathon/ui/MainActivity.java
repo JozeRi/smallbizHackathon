@@ -1,6 +1,5 @@
 package heroapps.com.smallbizhackathon.ui;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -145,11 +144,15 @@ public class MainActivity extends AppCompatActivity {
 
         date.setText(txt);
         description.setText(txt1);
-        amunt.setText(txt2);
-          if (txt3.equals("חובה"))
-            amunt.setTextColor(Color.RED);
-          else if (txt3.equals("זכות"))
-              amunt.setTextColor(Color.GREEN);
+
+          if (txt3.equals("חובה")){
+              amunt.setText("-"+txt2);
+              amunt.setTextColor(getResources().getColor(R.color.darkRed));
+          }else if (txt3.equals("זכות")){
+              amunt.setText(txt2);
+              amunt.setTextColor(getResources().getColor(R.color.darkGreen));
+          }
+
 
       }
     }
