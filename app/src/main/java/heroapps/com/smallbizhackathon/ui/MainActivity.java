@@ -1,5 +1,6 @@
 package heroapps.com.smallbizhackathon.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         holder.bindText( strings.get(position).getTransactionDate(),
                 strings.get(position).getTransactionDescription(),
-                strings.get(position).getAmount()
+                strings.get(position).getAmount(),strings.get(position).getDebit()
         );
 
     }
@@ -140,11 +141,15 @@ public class MainActivity extends AppCompatActivity {
 
 
       // 7> create the binding method - what data goes to which view!
-      public void bindText(String txt, String txt1, String txt2 ) {
+      public void bindText(String txt, String txt1, String txt2, String txt3 ) {
 
         date.setText(txt);
         description.setText(txt1);
         amunt.setText(txt2);
+          if (txt3.equals("חובה"))
+            amunt.setTextColor(Color.RED);
+          else if (txt3.equals("זכות"))
+              amunt.setTextColor(Color.GREEN);
 
       }
     }
