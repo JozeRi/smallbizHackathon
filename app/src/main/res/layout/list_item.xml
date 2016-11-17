@@ -50,7 +50,7 @@
         android:id="@+id/amuntTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.4"
+        android:layout_weight="0.6"
         android:gravity="right"
         android:text="-34.5"
         android:textAlignment="center"
