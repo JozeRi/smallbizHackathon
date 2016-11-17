@@ -16,8 +16,14 @@ public class BankAccount {
   @SerializedName(Constants.RETRO_BANK_ID)
   private String mBankId;
 
+  @SerializedName(Constants.RETRO_TRANS_BANK_ID)
+  private String mTransBankId;
+
   @SerializedName(Constants.RETRO_BANK_NAME)
   private String mBankName;
+
+  @SerializedName(Constants.RETRO_TRANS_BRANCH_ID)
+  private String mTransBranchId;
 
   @SerializedName(Constants.RETRO_BRANCH_ID)
   private String mBranchId;

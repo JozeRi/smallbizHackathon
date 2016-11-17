@@ -6,29 +6,33 @@ package heroapps.com.smallbizhackathon.model;
 
 public class User {
 
-  private String mName, mAccountNumber, mBranchNumber;
+    private String mName, mAccountNumber, mBranchNumber;
 
-  public String getName() {
-    return mName;
-  }
+    public String getName() {
+        return mName;
+    }
 
-  public void setName(String name) {
-    mName = name;
-  }
+    public void setName(String name) {
+        mName = name;
+    }
 
-  public String getAccountNumber() {
-    return mAccountNumber;
-  }
+    public String getAccountNumber() {
+        return mAccountNumber;
+    }
 
-  public void setAccountNumber(String accountNumber) {
-    mAccountNumber = accountNumber;
-  }
+    public void setAccountNumber(String accountNumber) {
+        mAccountNumber = accountNumber;
+    }
 
-  public String getBranchNumber() {
-    return mBranchNumber;
-  }
+    public String getBranchNumber() {
+        return mBranchNumber;
+    }
 
-  public void setBranchNumber(String branchNumber) {
-    mBranchNumber = branchNumber;
-  }
+    public void setBranchNumber(String branchNumber) {
+        mBranchNumber = branchNumber;
+    }
+
+    public String getAccountID() {
+        return Constants.BANK_ID + this.getBranchNumber() + this.getAccountNumber();
+    }
 }

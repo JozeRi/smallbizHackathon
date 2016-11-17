@@ -10,7 +10,6 @@ import android.transition.Fade;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,7 +30,7 @@ import heroapps.com.smallbizhackathon.ui.recyclerview.RecyclerTouchListener;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class PaychecksActivity extends AppCompatActivity implements View.OnClickListener {
+public class EmployeesActivity extends AppCompatActivity implements View.OnClickListener {
 
   private TransitionManager mTransitionManager;
   private Scene mExpandedAddEmployeeScene;
@@ -146,7 +144,7 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
     mRecyclerView.setHasFixedSize(true);
 
     // linear layout manager
-    mLayoutManager = new LinearLayoutManager(PaychecksActivity.this);
+    mLayoutManager = new LinearLayoutManager(EmployeesActivity.this);
     mRecyclerView.setLayoutManager(mLayoutManager);
 
     mAdapter = new EmployeesAdapter();
@@ -159,13 +157,11 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
     mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(BaseApplication.getInstance(), mRecyclerView, new ClickListener() {
       @Override
       public void onClick(View view, int position) {
-
       }
-
       @Override
       public void onLongClick(View view, final int position) {
 
-        Utils.displayDialog(PaychecksActivity.this, "מחיקת עובד",
+        Utils.displayDialog(EmployeesActivity.this, "מחיקת עובד",
             "האם אתה בטוח שברצונך למחוק את "+mEmployees.get(position).getmName()+"?",
             "כן",
             "ביטול",

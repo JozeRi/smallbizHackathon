@@ -4,6 +4,7 @@ import java.util.List;
 
 import heroapps.com.smallbizhackathon.model.retrofitobjects.AccountTransaction;
 import heroapps.com.smallbizhackathon.model.retrofitobjects.AllAccountTransactions;
+import heroapps.com.smallbizhackathon.model.retrofitobjects.MakeTransaction;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,7 +20,11 @@ import retrofit2.http.Url;
 public interface IRetrofitCalls {
 
   @Headers("Content-Type:application/json;charset=UTF-8")
-  @GET("accountTransactions/getAccountTransactions/9121008976501?offset=0&limit=50&version=V2")
-  Call<List<AccountTransaction>> getAccountTransactions(@Header("Ocp-Apim-Subscription-Key") String token);
+  @GET
+  Call<List<AccountTransaction>> getAccountTransactions(@Url String url, @Header("Ocp-Apim-Subscription-Key") String token);
+
+  @Headers("Content-Type:application/json;charset=UTF-8")
+  @POST("accountTransactions/moneyTransfers/99901?version=V2")
+  Call<MakeTransaction> makeTransaction(@Header("Ocp-Apim-Subscription-Key") String token, @Body MakeTransaction trans);
 
 }
