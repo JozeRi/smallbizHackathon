@@ -19,19 +19,19 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        accountNumET = (EditText) findViewById(R.id.accountNumET);
-        branchNumET = (EditText) findViewById(R.id.branchNumET);
-
-        signInBtn = (Button) findViewById(R.id.signInBtn);
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //add validation
-                //send api request
-
-            }
-        });
+//        accountNumET = (EditText) findViewById(R.id.accountNumET);
+//        branchNumET = (EditText) findViewById(R.id.branchNumET);
+//
+//        signInBtn = (Button) findViewById(R.id.signInBtn);
+//        signInBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                //add validation
+//                //send api request
+//
+//            }
+//        });
     }
 
 
