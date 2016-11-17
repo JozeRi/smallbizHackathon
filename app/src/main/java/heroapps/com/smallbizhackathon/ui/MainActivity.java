@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void fetchAccountTransactions() {
 
-    String url = "accountTransactions/getAccountTransactions/"+SharedPref.getUser().toString()+"?offset=0&limit=50&version=V2";
+    String url = "accountTransactions/getAccountTransactions/"+SharedPref.getUser().getAccountID()+"?offset=0&limit=50&version=V2";
 
     RetrofitCallUtil.getAccountTransactions(url, new IAccountTransactions() {
         @Override

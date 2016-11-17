@@ -27,20 +27,25 @@
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.QuickActions"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeNoActionBar">
+        </activity>
+        <activity android:name=".ui.TransactionActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeNoActionBar">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".ui.TransactionActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppThemeNoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 
