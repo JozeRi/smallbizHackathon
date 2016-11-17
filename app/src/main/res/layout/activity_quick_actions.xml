@@ -55,7 +55,7 @@
             android:layout_weight="1"
             android:elevation="6dp"
             android:layout_margin="10dp"
-            android:text="חתימת שותפים"
+            android:text="סבב חתימות"
             android:background="@drawable/q_shutafim"
             android:padding="7dp" />
 
