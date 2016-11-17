@@ -1,74 +1,145 @@
 package heroapps.com.smallbizhackathon.ui;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
+import android.transition.Scene;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import heroapps.com.smallbizhackathon.R;
 import heroapps.com.smallbizhackathon.business.SharedPref;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final String TAG = SplashActivity.class.getSimpleName();
+  private static final String TAG = SplashActivity.class.getSimpleName();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+  private static final int SPLASH_TIME_IN_MILLIS = 2500;
 
-        Button signInBtn = (Button) findViewById(R.id.signInBtn);
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+  private TimerTask mTimerTask = new TimerTask() {
+      @Override
+      public void run() {
+        checkIfLoggedIn();
+      }
+  };
 
-                //fill in screen with color
+  private TransitionManager mTransitionManager;
+  private Scene mSignInScene;
+  private Scene mBaseScene;
+  private Scene mCurrentScene;
 
-                //check if isSigned == true
-                if (!SharedPref.isSigned()) {
-                    userAccDetailsDialog();
-                    //open activity? dialog?
-                    //get user data from et
-                    return;
-                }
+  private ViewGroup mTransitionRoot;
 
-                //fill out screen
-                //go to main activity
-                //pass name
-                //pass balance
-            }
-        });
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_splash);
+      initViews();
+      mCurrentScene = mBaseScene;
+      setupTransitions();
 
+      new Timer().schedule(mTimerTask, SPLASH_TIME_IN_MILLIS);
+  }
+
+  private void initViews() {
+    mTransitionRoot = (ViewGroup) findViewById(R.id.root_container);
+  }
+
+  private void checkIfLoggedIn() {
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        if (SharedPref.isSigned()) {
+          navigateToMain();
+        } else {
+          goToSignUpScene();
+        }
+      }
+    });
+
+  }
+
+  private void goToSignUpScene() {
+    if (mCurrentScene == mSignInScene) {
+      mCurrentScene = mBaseScene;
+    } else {
+      mCurrentScene = mSignInScene;
     }
+    mTransitionManager.transitionTo(mCurrentScene);
+  }
 
-    private void userAccDetailsDialog() {
+  private void navigateToMain() {
+    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+    overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+//    runOnUiThread(new Runnable() {
+//      @Override
+//      public void run() {
+//
+//      }
+//    });
+  }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.get_details));
+  private void setupTransitions() {
+//        Slide slide = new Slide(Gravity.BOTTOM);
+//        slide.excludeTarget(android.R.id.statusBarBackground, true);
+//        getWindow().setEnterTransition(slide);
+//        getWindow().setSharedElementsUseOverlay(false);
 
-        final EditText branchNumInput = new EditText(this);
-        final EditText accNumInput = new EditText(this);
+    mTransitionManager = new TransitionManager();
 
-        branchNumInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-        accNumInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-        builder.setView(R.layout.activity_sign_in);
-        //builder.setView(accNumInput);
+    // Expanded scene
+    mSignInScene = Scene.getSceneForLayout(mTransitionRoot,
+        R.layout.activity_splash_signin, this);
 
-        builder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+    mSignInScene.setEnterAction(new Runnable() {
+      @Override
+      public void run() {
+        initViews();
+        mCurrentScene = mSignInScene;
+      }
+    });
 
-                //Log.d(TAG, SharedPref.getAccountId());
-                Intent goToMain = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(goToMain);
-            }
-        });
+    int durationSpeed = 750;
 
-        builder.show().getWindow().setLayout(1000,1000);
-    }
+    TransitionSet expandTransitionSet = new TransitionSet();
+    expandTransitionSet.setOrdering(TransitionSet.ORDERING_SEQUENTIAL);
+    ChangeBounds changeBounds = new ChangeBounds();
+    changeBounds.setDuration(durationSpeed);
+    expandTransitionSet.addTransition(changeBounds);
+
+    // Collapsed scene
+    mBaseScene = Scene.getSceneForLayout(mTransitionRoot,
+        R.layout.activity_splash, this);
+
+    mBaseScene.setEnterAction(new Runnable() {
+      @Override
+      public void run() {
+        initViews();
+        mCurrentScene = mBaseScene;
+      }
+    });
+
+    TransitionSet collapseTransitionSet = new TransitionSet();
+    collapseTransitionSet.setOrdering(TransitionSet.ORDERING_SEQUENTIAL);
+
+    ChangeBounds resetBounds = new ChangeBounds();
+    resetBounds.setDuration(durationSpeed);
+    collapseTransitionSet.addTransition(resetBounds);
+
+    mTransitionManager.setTransition(mBaseScene, mSignInScene, expandTransitionSet);
+    mTransitionManager.setTransition(mSignInScene, mBaseScene, collapseTransitionSet);
+    mBaseScene.enter();
+
+//        postponeEnterTransition();
+  }
 }
