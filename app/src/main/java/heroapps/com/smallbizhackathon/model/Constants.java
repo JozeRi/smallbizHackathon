@@ -47,6 +47,11 @@ public class Constants {
     public static final String RETRO_BANK_ID = "bankId";
     public static final String RETRO_BANK_NAME = "bankName";
 
+  public static final String RETRO_FROM_ACCOUNT = "fromAccount";
+  public static final String RETRO_TO_ACCOUNT = "toAccount";
+  public static final String RETRO_TRANS_BANK_ID = "bankID";
+  public static final String RETRO_TRANS_BRANCH_ID = "branchID";
+
     // --- RETROFIT RELATED CONSTANTS ENDS ! ---
 
 }
