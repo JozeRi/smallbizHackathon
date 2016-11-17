@@ -4,6 +4,8 @@ import android.app.Application;
 
 import heroapps.com.smallbizhackathon.business.retrofit.IRetrofitCalls;
 import heroapps.com.smallbizhackathon.business.retrofit.RetrofitClient;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by Refael Ozeri on 16/11/2016.
@@ -26,6 +28,10 @@ public class BaseApplication extends Application {
 
     loadRetrofit();
 
+    Realm.init(this);
+    RealmConfiguration realmConfiguration = new RealmConfiguration.Builder().build();
+    Realm.setDefaultConfiguration(realmConfiguration);
+
   }
 
   private void loadRetrofit() {
@@ -38,4 +44,5 @@ public class BaseApplication extends Application {
     }
     return mRetrofitService;
   }
+
 }

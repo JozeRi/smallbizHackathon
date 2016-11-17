@@ -1,5 +1,6 @@
 package heroapps.com.smallbizhackathon.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,55 +14,62 @@ import android.widget.TextView;
 import java.util.List;
 
 import heroapps.com.smallbizhackathon.R;
+import heroapps.com.smallbizhackathon.business.SharedPref;
 import heroapps.com.smallbizhackathon.business.listeners.IAccountTransactions;
 import heroapps.com.smallbizhackathon.business.retrofit.RetrofitCallUtil;
 import heroapps.com.smallbizhackathon.model.retrofitobjects.AccountTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
+  private View mFooter;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-
-
-      fetchAccountTransactions();
-
+    initViews();
+    fetchAccountTransactions();
   }
 
+  private void initViews() {
+    mFooter = findViewById(R.id.main_footer);
+    mFooter.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        startActivity(new Intent(MainActivity.this, PaychecksActivity.class));
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+      }
+    });
+  }
 
-    private void fetchAccountTransactions() {
-        RetrofitCallUtil.getAccountTransactions(new IAccountTransactions() {
-            @Override
-            public void onSuccess(List<AccountTransaction> accountTransactions) {
-                Log.d("", accountTransactions.toString());
+  private void fetchAccountTransactions() {
+      RetrofitCallUtil.getAccountTransactions(new IAccountTransactions() {
+          @Override
+          public void onSuccess(List<AccountTransaction> accountTransactions) {
+              Log.d("", accountTransactions.toString());
 
-                String name= accountTransactions.get(0).getAccount().getAccountName();
-                Double balance= accountTransactions.get(0).getBalance();
+              String name = SharedPref.getUser().getName();//accountTransactions.get(0).getAccount().getAccountName();
+              Double balance= accountTransactions.get(0).getBalance();
 
-                TextView title= (TextView)findViewById(R.id.titleTv);
-                title.setText(getResources().getString( R.string.hello) +"  "+ name);
+              TextView title= (TextView)findViewById(R.id.titleTv);
+              title.setText(getResources().getString( R.string.hello) +"  "+ name);
 
-                TextView subtitle= (TextView)findViewById(R.id.subtitleTv);
-                subtitle.setText(getResources().getString(R.string.your_balance)+"  "+ balance );
+              TextView subtitle= (TextView)findViewById(R.id.subtitleTv);
+              subtitle.setText(getResources().getString(R.string.your_balance)+"  "+ balance );
 
+              RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerList);
+              MyAdapter adapter = new MyAdapter(accountTransactions);
+              recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
+              recyclerView.swapAdapter(adapter, true);
 
+          }
 
-                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerList);
-                MyAdapter adapter = new MyAdapter(accountTransactions);
-                recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
-                recyclerView.swapAdapter(adapter, true);
-
-            }
-
-            @Override
-            public void onError(String error) {
-                Log.d("", error);
-            }
-        });
-    }
-
+          @Override
+          public void onError(String error) {
+              Log.d("", error);
+          }
+      });
+  }
 
   // 1> Create our Adapter class ==> generic type is a ViewHolder, a wrapper for each item
   public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
@@ -69,13 +77,11 @@ public class MainActivity extends AppCompatActivity {
     // 8> Create the data structure
     private List<AccountTransaction> strings;
 
-
     // 9> create constructor that gets a new ArrayList
     public MyAdapter(List<AccountTransaction> string) {
 
       this.strings = string;
     }
-
 
     // 11> what to do when creating a new MyHolder - inflate the item layout and pass it to a new holder
     @Override
@@ -110,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
         private TextView description;
         private TextView amunt;
 
-
-
         // 3> Add constructor
       public MyViewHolder(View itemView) {
         super(itemView);
@@ -121,11 +125,9 @@ public class MainActivity extends AppCompatActivity {
           description = (TextView) itemView.findViewById(R.id.descriptionTv);
           amunt = (TextView) itemView.findViewById(R.id.amuntTv);
 
-
           itemView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-
 
             //Intent intent=new Intent(this,DetailActivity.class);
             //intent.putExtra("detail",text.getText());
@@ -134,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
           }
         });
-
 
       }
 

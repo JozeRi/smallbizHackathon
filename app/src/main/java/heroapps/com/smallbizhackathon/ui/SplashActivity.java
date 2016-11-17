@@ -10,8 +10,10 @@ import android.transition.Fade;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.Timer;
@@ -19,6 +21,7 @@ import java.util.TimerTask;
 
 import heroapps.com.smallbizhackathon.R;
 import heroapps.com.smallbizhackathon.business.SharedPref;
+import heroapps.com.smallbizhackathon.model.User;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -39,6 +42,9 @@ public class SplashActivity extends AppCompatActivity {
   private Scene mCurrentScene;
 
   private ImageView mSplashBg;
+  private View mSplashEnterBtn;
+
+  private EditText mBusinessName, mAccountNumber, mBranchNumber;
 
   private ViewGroup mTransitionRoot;
 
@@ -56,6 +62,30 @@ public class SplashActivity extends AppCompatActivity {
   private void initViews() {
     mTransitionRoot = (ViewGroup) findViewById(R.id.root_container);
     mSplashBg = (ImageView) findViewById(R.id.splash_bg);
+
+    mBusinessName = (EditText) findViewById(R.id.signin_et_business_name);
+    mAccountNumber = (EditText) findViewById(R.id.signin_et_account_number);
+    mBranchNumber = (EditText) findViewById(R.id.signin_et_branch_number);
+
+    mSplashEnterBtn = findViewById(R.id.splash_enter);
+    if (mSplashEnterBtn != null) {
+      mSplashEnterBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+          User user = new User();
+          user.setName(mBusinessName.getText().toString());
+          user.setAccountNumber(mAccountNumber.getText().toString());
+          user.setBranchNumber(mBranchNumber.getText().toString());
+          SharedPref.saveUser(user);
+
+          SharedPref.setSignedStatus(true);
+
+          //only if valid
+          navigateToMain();
+        }
+      });
+    }
     populate();
   }
 
@@ -88,12 +118,6 @@ public class SplashActivity extends AppCompatActivity {
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-//    runOnUiThread(new Runnable() {
-//      @Override
-//      public void run() {
-//
-//      }
-//    });
   }
 
   private void setupTransitions() {

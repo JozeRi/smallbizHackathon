@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".ui.MainActivity"
+                  android:theme="@style/AppThemeNoActionBar"
                   android:screenOrientation="portrait">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
@@ -22,9 +23,6 @@
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".ui.SignInActivity"
-                  android:screenOrientation="portrait">
-                  </activity>
 
         <activity android:name=".ui.PaychecksActivity"
                   android:theme="@style/AppThemeNoActionBar"
