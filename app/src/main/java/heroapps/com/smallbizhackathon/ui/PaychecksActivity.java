@@ -1,17 +1,14 @@
 package heroapps.com.smallbizhackathon.ui;
 
-import android.app.Activity;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
-import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -19,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import heroapps.com.smallbizhackathon.R;
+import heroapps.com.smallbizhackathon.model.Employee;
+import io.realm.Realm;
 
 public class PaychecksActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,6 +39,12 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
     initViews();
     mCurrentScene = mBaseScene;
     setupTransitions();
+
+
+
+
+
+
   }
 
   private void initViews() {
@@ -53,6 +58,60 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
 
     mAddNewEmployeeBtn = (TextView) findViewById(R.id.paychecks_add_new_employee_btn);
     mAddNewEmployeeBtn.setOnClickListener(this);
+
+
+    if (mSalary == null) {
+      return;
+    }
+
+    mSalary.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+        if (mName.getText().length()<2){
+          mName.setText("");
+          mName.setHint("הכנס את שם העובד");
+          mName.setHintTextColor(Color.RED);
+        }else if (mBankNum.getText().length()<2){
+          mBankNum.setText("");
+          mBankNum.setHint("הכנס מספר בנק");
+          mBankNum.setHintTextColor(Color.RED);
+        }else if (mBranchNum.getText().length()<3){
+          mBranchNum.setText("");
+          mBranchNum.setHint("הכנס את מספר הסניף");
+          mBranchNum.setHintTextColor(Color.RED);
+        }else if (mAccountNum.getText().length()<2){
+          mAccountNum.setText("");
+          mAccountNum.setHint("הכנס את מספר החשבון");
+          mAccountNum.setHintTextColor(Color.RED);
+        }else if (mSalary.getText().length()<1){
+          mSalary.setText("");
+          mSalary.setHint("הכנס את המשכורת");
+          mSalary.setHintTextColor(Color.RED);
+        }else {
+          Realm.init(PaychecksActivity.this);
+          Realm realm = Realm.getDefaultInstance();
+          realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+              Employee employee = realm.createObject(Employee.class);
+              employee.setmName(mName.getText().toString());
+              employee.setmBankNum(mBankNum.getText().toString());
+              employee.setmBranchNum(mBranchNum.getText().toString());
+              employee.setmAccountNum(mAccountNum.getText().toString());
+              employee.setmSalary(Double.parseDouble(mSalary.getText().toString()));
+
+            }
+          });
+        }
+
+
+        return false;
+      }
+    });
+
+
+
   }
 
   @Override
