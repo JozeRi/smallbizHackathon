@@ -99,6 +99,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:imeOptions="actionDone"
                 android:hint="הכנס את המשכורת"
                 android:ems="10"/>
 

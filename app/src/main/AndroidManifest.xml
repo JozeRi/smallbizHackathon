@@ -28,13 +28,18 @@
 
         <activity android:name=".ui.PaychecksActivity"
                   android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".ui.SplashActivity">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+    </activity>
+
+
+        <activity android:name=".ui.SplashActivity">
+
         </activity>
     </application>
 
