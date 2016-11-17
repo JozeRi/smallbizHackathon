@@ -3,21 +3,34 @@ package heroapps.com.smallbizhackathon.ui;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import heroapps.com.smallbizhackathon.BaseApplication;
 import heroapps.com.smallbizhackathon.R;
+import heroapps.com.smallbizhackathon.business.Utils;
+import heroapps.com.smallbizhackathon.business.listeners.IDialogListener;
 import heroapps.com.smallbizhackathon.model.Employee;
+import heroapps.com.smallbizhackathon.ui.recyclerview.ClickListener;
+import heroapps.com.smallbizhackathon.ui.recyclerview.RecyclerTouchListener;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class PaychecksActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +44,15 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
   private EditText mName, mBankNum, mBranchNum, mAccountNum, mSalary;
 
   private TextView mAddNewEmployeeBtn;
+
+  private ArrayList<Employee> mEmployees = new ArrayList<>();
+
+  private Realm mRealm;
+
+  private RecyclerView mRecyclerView; //advertisements recyclerView
+  private RecyclerView.Adapter mAdapter;
+  private RecyclerView.LayoutManager mLayoutManager;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,10 +62,13 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
     mCurrentScene = mBaseScene;
     setupTransitions();
 
+    mRealm = Realm.getDefaultInstance();
 
-
-
-
+    if (mRealm == null) return;
+    RealmResults<Employee> results = mRealm.where(Employee.class).findAll();
+    if (!results.isEmpty()) {
+      updateEmployees();
+    }
 
   }
 
@@ -59,6 +84,7 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
     mAddNewEmployeeBtn = (TextView) findViewById(R.id.paychecks_add_new_employee_btn);
     mAddNewEmployeeBtn.setOnClickListener(this);
 
+    initRecyclerView();
 
     if (mSalary == null) {
       return;
@@ -89,29 +115,82 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
           mSalary.setHint("הכנס את המשכורת");
           mSalary.setHintTextColor(Color.RED);
         }else {
-          Realm.init(PaychecksActivity.this);
-          Realm realm = Realm.getDefaultInstance();
-          realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-              Employee employee = realm.createObject(Employee.class);
-              employee.setmName(mName.getText().toString());
-              employee.setmBankNum(mBankNum.getText().toString());
-              employee.setmBranchNum(mBranchNum.getText().toString());
-              employee.setmAccountNum(mAccountNum.getText().toString());
-              employee.setmSalary(Double.parseDouble(mSalary.getText().toString()));
 
-            }
-          });
+          mRealm.beginTransaction();
+          Employee employee = mRealm.createObject(Employee.class);
+          employee.setmName(mName.getText().toString());
+          employee.setmBankNum(mBankNum.getText().toString());
+          employee.setmBranchNum(mBranchNum.getText().toString());
+          employee.setmAccountNum(mAccountNum.getText().toString());
+          employee.setmSalary(Double.parseDouble(mSalary.getText().toString()));
+          mRealm.commitTransaction();
+
+          onNewEmployeeClicked();
         }
-
-
         return false;
       }
     });
+  }
 
+  private void updateEmployees() {
 
+    if (mRealm == null) return;
+    RealmResults<Employee> results = mRealm.where(Employee.class).findAll();
+    if (results.isEmpty()) {
+      return;
+    }
 
+    mEmployees = new ArrayList<>(results);
+    // use this setting to improve performance if you know that changes
+    // in content do not change the layout size of the RecyclerView
+    mRecyclerView.setHasFixedSize(true);
+
+    // linear layout manager
+    mLayoutManager = new LinearLayoutManager(PaychecksActivity.this);
+    mRecyclerView.setLayoutManager(mLayoutManager);
+
+    mAdapter = new EmployeesAdapter();
+    mRecyclerView.setAdapter(mAdapter);
+  }
+
+  private void initRecyclerView() {
+    mRecyclerView = (RecyclerView) findViewById(R.id.employees_recycler_view);
+
+    mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(BaseApplication.getInstance(), mRecyclerView, new ClickListener() {
+      @Override
+      public void onClick(View view, int position) {
+
+      }
+
+      @Override
+      public void onLongClick(View view, final int position) {
+
+        Utils.displayDialog(PaychecksActivity.this, "מחיקת עובד",
+            "האם אתה בטוח שברצונך למחוק את "+mEmployees.get(position).getmName()+"?",
+            "כן",
+            "ביטול",
+            new IDialogListener() {
+          @Override
+          public void onPositiveClicked() {
+            mRealm.beginTransaction();
+            mEmployees.get(position).deleteFromRealm();
+            mRealm.commitTransaction();
+            mEmployees.remove(position);
+            updateEmployees();
+          }
+          @Override
+          public void onNegativeClicked() {
+
+          }
+        });
+      }
+    }));
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mRealm.close();
   }
 
   @Override
@@ -149,6 +228,7 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
       public void run() {
         initViews();
         mCurrentScene = mExpandedAddEmployeeScene;
+        updateEmployees();
       }
     });
 
@@ -200,6 +280,7 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
       public void run() {
         initViews();
         mCurrentScene = mBaseScene;
+        updateEmployees();
       }
     });
 
@@ -217,4 +298,54 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
 //        postponeEnterTransition();
   }
 
+  @Override
+  public void onBackPressed() {
+    super.onBackPressed();
+    overridePendingTransition(R.anim.slide_out_down, R.anim.slide_in_down);
+  }
+
+  public class EmployeesAdapter extends RecyclerView.Adapter<EmployeesAdapter.MyViewHolder> {
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+      public TextView name, salary, bankNum, branchNum, accountNum;
+
+      public MyViewHolder(View view) {
+        super(view);
+
+        name = (TextView) view.findViewById(R.id.employee_name);
+        salary = (TextView) view.findViewById(R.id.employee_salary);
+        bankNum = (TextView) view.findViewById(R.id.employee_bank_number);
+        branchNum = (TextView) view.findViewById(R.id.employee_branch_number);
+        accountNum = (TextView) view.findViewById(R.id.employee_account_number);
+      }
+    }
+
+    public EmployeesAdapter() {
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      View itemView = LayoutInflater.from(parent.getContext())
+          .inflate(R.layout.employee_list_item, parent, false);
+
+      return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+      Employee employee = mEmployees.get(position);
+//      int categoryId = category.getCategoryId();
+      holder.name.setText(employee.getmName());
+      String salary = String.format("%s", employee.getmSalary());
+      holder.salary.setText(salary + " NIS");
+      holder.bankNum.setText("בנק " + employee.getmBankNum());
+      holder.branchNum.setText("סניף " + employee.getmBranchNum());
+      holder.accountNum.setText("חשבון " + employee.getmAccountNum());
+    }
+
+    @Override
+    public int getItemCount() {
+      return mEmployees.size();
+    }
+  }
 }
