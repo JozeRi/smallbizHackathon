@@ -8,6 +8,8 @@ public class Constants {
 
     public static final String BANK_API_KEY = "9b8e45f4c990404e873a10dfc123ac20";
 
+    public static final String BANK_ID = "912";
+
     // --- RETROFIT RELATED CONSTANTS START ! ---
 
     //RETROFIT TRANSACTIONS CONSTANTS
@@ -43,6 +45,9 @@ public class Constants {
     // --- RETROFIT RELATED CONSTANTS ENDS ! ---
 
 
+    //shared Pref requests
+    public static final int SP_REQ_ID_ACC_NUM = 100;
+    public static final int SP_REQ_ID_BRANCH_NUM = 200;
 
 
 }

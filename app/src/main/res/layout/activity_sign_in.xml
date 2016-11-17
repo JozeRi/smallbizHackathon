@@ -12,26 +12,19 @@
     tools:context="heroapps.com.smallbizhackathon.ui.SignInActivity">
 
     <EditText
-        android:id="@+id/accountNumET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:text="Account Number" />
-
-    <EditText
         android:id="@+id/branchNumET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:text="Branch Number" />
+        android:hint="Branch Number" />
 
-    <Button
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:id="@+id/signInBtn"
+    <EditText
+        android:id="@+id/accountNumET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in"
-        android:layout_gravity="bottom"/>
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Account Number" />
+
 </LinearLayout>
