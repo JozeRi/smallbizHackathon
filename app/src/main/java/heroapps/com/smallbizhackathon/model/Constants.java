@@ -10,6 +10,11 @@ public class Constants {
 
     public static final String BANK_ID = "912";
 
+    public static final String SP_IS_SIGNED = "isSigned";
+    public static final String SP_USER_NAME = "username";
+    public static final String SP_BRANCH_NUMBER = "branchNumber";
+    public static final String SP_ACCOUNT_NUMBER = "accountNumber";
+
     // --- RETROFIT RELATED CONSTANTS START ! ---
 
     //RETROFIT TRANSACTIONS CONSTANTS
@@ -43,11 +48,5 @@ public class Constants {
     public static final String RETRO_BANK_NAME = "bankName";
 
     // --- RETROFIT RELATED CONSTANTS ENDS ! ---
-
-
-    //shared Pref requests
-    public static final int SP_REQ_ID_ACC_NUM = 100;
-    public static final int SP_REQ_ID_BRANCH_NUM = 200;
-
 
 }

@@ -46,7 +46,6 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-
     private void userAccDetailsDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
