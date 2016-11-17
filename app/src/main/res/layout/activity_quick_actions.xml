@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:elevation="6dp"
             android:layout_margin="10dp"
-            android:text="רשימת עובדים"
+            android:text="ניהול עובדים"
             android:background="@drawable/q_workers"
             android:padding="7dp" />
 
