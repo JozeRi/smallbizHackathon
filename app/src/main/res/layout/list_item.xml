@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blueGray"
+    android:weightSum="1">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="6.50"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:background="@color/blueGray">
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateTv"
+                android:layout_weight="6.50"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_text_size"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frameLi"
+                android:layout_margin="4dp"
+                android:background="@color/white"
+                android:layout_weight="6.50">
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descriptionTv"
+                    android:layout_weight="0.9"
+                    android:textAlignment="viewEnd"
+                    android:textSize="@dimen/medium_text_size"
+                    android:padding="4dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/amuntTv"
+                    android:layout_weight="0.9"
+                    android:textAlignment="viewEnd"
+                    android:textSize="24sp"
+                    android:layout_width="match_parent"
+                    android:padding="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
