@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/blueGray"
-    android:weightSum="1">
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="6.50"
-        android:background="@color/white">
+        android:layout_marginRight="8dp"
+        android:layout_weight="0.8"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/descriptionTv"
+            style="@style/CustomMediumTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:background="@color/blueGray">
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="פירוט הוצאה"
+            android:textColor="@color/blueGray"
+            android:paddingLeft="5dp" />
 
-            <TextView
-                android:text="TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dateTv"
-                android:layout_weight="6.50"
-                android:textAlignment="center"
-                android:textSize="@dimen/medium_text_size"
-                android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/dateTv"
+            style="@style/CustomSmallTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="25-03-16"
+            android:textColor="@color/lightGray" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/frameLi"
-                android:layout_margin="4dp"
-                android:background="@color/white"
-                android:layout_weight="6.50">
 
-                <TextView
-                    android:text="TextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/descriptionTv"
-                    android:layout_weight="0.9"
-                    android:textAlignment="viewEnd"
-                    android:textSize="@dimen/medium_text_size"
-                    android:padding="4dp" />
+    </LinearLayout>
 
-                <TextView
-                    android:text="TextView"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/amuntTv"
-                    android:layout_weight="0.9"
-                    android:textAlignment="viewEnd"
-                    android:textSize="24sp"
-                    android:layout_width="match_parent"
-                    android:padding="4dp" />
-            </LinearLayout>
-        </LinearLayout>
-    </FrameLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/lightGray" />
+
+    <TextView
+        android:id="@+id/amuntTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.4"
+        android:gravity="right"
+        android:text="-34.5"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
 </LinearLayout>
+

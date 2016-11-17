@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         holder.bindText( strings.get(position).getTransactionDate(),
                 strings.get(position).getTransactionDescription(),
-                strings.get(position).getAmount()
+                strings.get(position).getAmount(),strings.get(position).getDebit()
         );
 
     }
@@ -141,11 +141,19 @@ public class MainActivity extends AppCompatActivity {
 
 
       // 7> create the binding method - what data goes to which view!
-      public void bindText(String txt, String txt1, String txt2 ) {
+      public void bindText(String txt, String txt1, String txt2, String txt3 ) {
 
         date.setText(txt);
         description.setText(txt1);
-        amunt.setText(txt2);
+
+          if (txt3.equals("חובה")){
+              amunt.setText("-"+txt2);
+              amunt.setTextColor(getResources().getColor(R.color.darkRed));
+          }else if (txt3.equals("זכות")){
+              amunt.setText(txt2);
+              amunt.setTextColor(getResources().getColor(R.color.darkGreen));
+          }
+
 
       }
     }
