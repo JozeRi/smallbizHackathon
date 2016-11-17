@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     mFooter.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        startActivity(new Intent(MainActivity.this, PaychecksActivity.class));
+        startActivity(new Intent(MainActivity.this, EmployeesActivity.class));
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
       }
     });
@@ -46,35 +46,32 @@ public class MainActivity extends AppCompatActivity {
 
     String url = "accountTransactions/getAccountTransactions/"+SharedPref.getUser().toString()+"?offset=0&limit=50&version=V2";
 
+    RetrofitCallUtil.getAccountTransactions(url, new IAccountTransactions() {
+        @Override
+        public void onSuccess(List<AccountTransaction> accountTransactions) {
+            Log.d("", accountTransactions.toString());
 
+            String name = SharedPref.getUser().getName();//accountTransactions.get(0).getAccount().getAccountName();
+            Double balance= accountTransactions.get(0).getBalance();
 
+            TextView title= (TextView)findViewById(R.id.titleTv);
+            title.setText(getResources().getString( R.string.hello) +"  "+ name);
 
-      RetrofitCallUtil.getAccountTransactions(url, new IAccountTransactions() {
-          @Override
-          public void onSuccess(List<AccountTransaction> accountTransactions) {
-              Log.d("", accountTransactions.toString());
+            TextView subtitle= (TextView)findViewById(R.id.subtitleTv);
+            subtitle.setText(getResources().getString(R.string.your_balance)+"  "+ balance );
 
-              String name = SharedPref.getUser().getName();//accountTransactions.get(0).getAccount().getAccountName();
-              Double balance= accountTransactions.get(0).getBalance();
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerList);
+            MyAdapter adapter = new MyAdapter(accountTransactions);
+            recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
+            recyclerView.swapAdapter(adapter, true);
 
-              TextView title= (TextView)findViewById(R.id.titleTv);
-              title.setText(getResources().getString( R.string.hello) +"  "+ name);
+        }
 
-              TextView subtitle= (TextView)findViewById(R.id.subtitleTv);
-              subtitle.setText(getResources().getString(R.string.your_balance)+"  "+ balance );
-
-              RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerList);
-              MyAdapter adapter = new MyAdapter(accountTransactions);
-              recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
-              recyclerView.swapAdapter(adapter, true);
-
-          }
-
-          @Override
-          public void onError(String error) {
-              Log.d("", error);
-          }
-      });
+        @Override
+        public void onError(String error) {
+            Log.d("", error);
+        }
+    });
   }
 
   // 1> Create our Adapter class ==> generic type is a ViewHolder, a wrapper for each item
