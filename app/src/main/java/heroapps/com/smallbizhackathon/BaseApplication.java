@@ -2,6 +2,7 @@ package heroapps.com.smallbizhackathon;
 
 import android.app.Application;
 
+import heroapps.com.smallbizhackathon.business.Utils;
 import heroapps.com.smallbizhackathon.business.retrofit.IRetrofitCalls;
 import heroapps.com.smallbizhackathon.business.retrofit.RetrofitClient;
 import io.realm.Realm;
@@ -31,6 +32,8 @@ public class BaseApplication extends Application {
     Realm.init(this);
     RealmConfiguration realmConfiguration = new RealmConfiguration.Builder().build();
     Realm.setDefaultConfiguration(realmConfiguration);
+
+    Utils.createLocalNotification("Best solution for your business", "Best solution for your business", "Best solution for your business", this);
 
   }
 

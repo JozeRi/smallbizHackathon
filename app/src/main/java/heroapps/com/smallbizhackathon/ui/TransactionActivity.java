@@ -38,7 +38,7 @@ public class TransactionActivity extends AppCompatActivity {
       finish();
     }
 
-    sendTransactions(11);
+    sendTransactions(count);
   }
 
   private void initViews() {
