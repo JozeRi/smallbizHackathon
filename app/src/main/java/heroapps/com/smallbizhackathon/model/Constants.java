@@ -14,6 +14,8 @@ public class Constants {
     public static final String SP_USER_NAME = "username";
     public static final String SP_BRANCH_NUMBER = "branchNumber";
     public static final String SP_ACCOUNT_NUMBER = "accountNumber";
+    public static final String SP_ACCOUNT_ID = "accountId";
+
 
     // --- RETROFIT RELATED CONSTANTS START ! ---
 
