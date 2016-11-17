@@ -1,8 +1,11 @@
 package heroapps.com.smallbizhackathon.business;
 
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
+import heroapps.com.smallbizhackathon.BaseApplication;
 import heroapps.com.smallbizhackathon.model.Constants;
+import heroapps.com.smallbizhackathon.model.User;
 
 /**
  * Created by Refael Ozeri on 16/11/2016.
@@ -10,65 +13,28 @@ import heroapps.com.smallbizhackathon.model.Constants;
 
 public class SharedPref {
 
-    static SharedPreferences pref;
-    static SharedPreferences.Editor editor;
+    //initialize the shared pref.
+    private static SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(BaseApplication.getInstance());
 
-    public static void writeToSharedPref(int REQ_ID, int num) {
-
-        //pref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = pref.edit();
-
-        switch (REQ_ID) {
-            case Constants.SP_REQ_ID_ACC_NUM:
-                editor.putInt("acc_num", num);
-                break;
-            case Constants.SP_REQ_ID_BRANCH_NUM:
-                editor.putInt("branch_num", num);
-                break;
-        }
-
-        editor.putBoolean("isSigned", true);
-
-        editor.apply();
+    public static void saveUser(User user) {
+      mSharedPreferences.edit().putString(Constants.SP_USER_NAME, user.getName()).apply();
+      mSharedPreferences.edit().putString(Constants.SP_BRANCH_NUMBER, user.getBranchNumber()).apply();
+      mSharedPreferences.edit().putString(Constants.SP_ACCOUNT_NUMBER, user.getAccountNumber()).apply();
     }
 
-    private static int getDataFromSharedPref(int REQ_ID) {
-
-        switch (REQ_ID) {
-            case Constants.SP_REQ_ID_ACC_NUM:
-                return pref.getInt("acc_num", 0);
-            case Constants.SP_REQ_ID_BRANCH_NUM:
-                return pref.getInt("branch_num", 0);
-        }
-
-        return -1;
+    public static User getUser() {
+      User user = new User();
+      user.setName(mSharedPreferences.getString(Constants.SP_USER_NAME, "No Name"));
+      user.setBranchNumber(mSharedPreferences.getString(Constants.SP_BRANCH_NUMBER, "No Number"));
+      user.setAccountNumber(mSharedPreferences.getString(Constants.SP_ACCOUNT_NUMBER, "No Number"));
+      return user;
     }
 
-    public static boolean isSigned(){
-        return pref.getBoolean("isSigned", false);
-    }
+  public static void setSignedStatus(boolean isSigned) {
+    mSharedPreferences.edit().putBoolean(Constants.SP_IS_SIGNED, isSigned).apply();
+  }
 
-
-    /*public static boolean isSigned = false;
-    public static String accountId = "";
-
-    public static boolean getIsSigned() {
-        return isSigned;
-    }
-
-    public static void setIsSigned(boolean isSigned) {
-        SharedPref.isSigned = isSigned;
-    }
-
-    public static String getAccountId() {
-        return accountId;
-    }
-
-    public static void setAccountId(String branchNum, String accountNum) {
-
-        //constant of bank number
-
-        SharedPref.accountId = Constants.BANK_ID + branchNum + accountNum;
-
-    }*/
+  public static boolean isSigned() {
+    return mSharedPreferences.getBoolean(Constants.SP_IS_SIGNED, false);
+  }
 }
