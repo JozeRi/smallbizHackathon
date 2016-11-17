@@ -24,8 +24,8 @@ public class RetrofitCallUtil {
   /**
    * This method retrieves our bank account transactions
    */
-  public static void getAccountTransactions(final IAccountTransactions listener) {
-    BaseApplication.getInstance().getRetrofit().getAccountTransactions(Constants.BANK_API_KEY).enqueue(new Callback<List<AccountTransaction>>() {
+  public static void getAccountTransactions(final String url, final IAccountTransactions listener) {
+    BaseApplication.getInstance().getRetrofit().getAccountTransactions(url, Constants.BANK_API_KEY).enqueue(new Callback<List<AccountTransaction>>() {
       @Override
       public void onResponse(Call<List<AccountTransaction>> call, Response<List<AccountTransaction>> response) {
         List<AccountTransaction> transactions = response.body();

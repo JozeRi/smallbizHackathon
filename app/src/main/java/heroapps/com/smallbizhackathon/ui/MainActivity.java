@@ -43,7 +43,13 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void fetchAccountTransactions() {
-      RetrofitCallUtil.getAccountTransactions(new IAccountTransactions() {
+
+    String url = "accountTransactions/getAccountTransactions/"+SharedPref.getUser().toString()+"?offset=0&limit=50&version=V2";
+
+
+
+
+      RetrofitCallUtil.getAccountTransactions(url, new IAccountTransactions() {
           @Override
           public void onSuccess(List<AccountTransaction> accountTransactions) {
               Log.d("", accountTransactions.toString());

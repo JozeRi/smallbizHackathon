@@ -159,9 +159,7 @@ public class PaychecksActivity extends AppCompatActivity implements View.OnClick
     mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(BaseApplication.getInstance(), mRecyclerView, new ClickListener() {
       @Override
       public void onClick(View view, int position) {
-
       }
-
       @Override
       public void onLongClick(View view, final int position) {
 
