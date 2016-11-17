@@ -33,8 +33,6 @@ public class BaseApplication extends Application {
     RealmConfiguration realmConfiguration = new RealmConfiguration.Builder().build();
     Realm.setDefaultConfiguration(realmConfiguration);
 
-    Utils.createLocalNotification("Best solution for your business", "Best solution for your business", "Best solution for your business", this);
-
   }
 
   private void loadRetrofit() {

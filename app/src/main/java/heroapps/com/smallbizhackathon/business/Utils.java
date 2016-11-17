@@ -41,7 +41,6 @@ public class Utils {
     PendingIntent pendingSnoozeIntent = PendingIntent.getService(BaseApplication.getInstance(), NOTIFICATION_ID, remindLaterIntent, 0); //getBroadcast(BaseApplication.getAppContext(), 0, snoozeIntent, 0);
 
     Intent payNowIntent = new Intent("PayNow");
-    payNowIntent.putExtra("Count", 10);
     payNowIntent.putExtra("NotificationId", NOTIFICATION_ID);
     PendingIntent pendingDrinkIntent = PendingIntent.getService(BaseApplication.getInstance(), NOTIFICATION_ID, payNowIntent, 0);
 

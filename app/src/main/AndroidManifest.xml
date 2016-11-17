@@ -47,6 +47,16 @@
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         </activity>
+
+        <!-- ACTION SERVICE - service that tends the notifications btn events -->
+        <service
+            android:name=".business.services.NotificationActionService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="PayNow" />
+                <action android:name="RemindLater" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
